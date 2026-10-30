@@ -123,6 +123,8 @@ details.msum summary{font-size:13px}
 @media(max-width:700px){
   #dealbox{max-height:48vh}
   #dealbox.expanded{max-height:72vh}
+  #dealbox .deal{padding:7px 2px}
+  #dealbox .deal small{line-height:1.45}
   #dash:not(.expanded) #dtrend .dsub{display:none}
   #dash:not(.expanded) #dtrend .dtitle{font-size:16px}
   #dash:not(.expanded) #dtrend svg{height:128px}
