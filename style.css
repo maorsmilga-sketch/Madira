@@ -58,7 +58,7 @@ section.context{position:relative;padding-inline-start:56px}
 .dleg{display:flex;gap:14px;font-size:11px;color:#5B6B84;margin-top:4px}
 .dleg i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-inline-end:5px;vertical-align:middle}
 .dnote{font-size:12px;color:#3D4A63;line-height:1.6;margin-top:2px}
-.dsmall{font-size:11px;color:#5B6B84;margin-top:6px}
+.dsmall{font-size:11px;color:#5B6B84;margin-top:6px}.dpeek{font-size:11px;color:#5B6B84;margin-top:4px;font-weight:600}
 .dinfo{margin-top:10px;font-size:10.5px;color:#8A97AB;border-top:1px solid rgba(15,23,42,.08);padding-top:7px;line-height:1.55}
 .dibtn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;min-height:16px;border-radius:50%;border:1.2px solid #8A97AB;color:#8A97AB;background:transparent;font-size:10px;font-weight:700;padding:0;margin-inline-end:4px;vertical-align:-3px;cursor:pointer}
 @media(max-width:600px){#dash{padding:14px 14px}.dbar .n{width:78px}}
