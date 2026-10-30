@@ -31,7 +31,7 @@ const STREETS={};function loadStreets(cid){return STREETS[cid]||(STREETS[cid]=fe
 function rowPass(r,s,p,st){let y=+r[0].slice(0,4),mo=+r[0].slice(5,7),mi=(y-2021)*12+(mo-1);if(mi<0||!p.cur.has(mi))return false;if(s.group<7&&r[4]!==s.group)return false;if(s.sqm){let x=parseFloat(String(r[2]).replace(/,/g,''));if(!isFinite(x)){st.nosqm++;return false;}let b=x<=60?1:x<=80?2:x<=100?3:x<=120?4:5;if(b!==s.sqm)return false;}return true;}
 function fillReal(deals,n){let el=$('realdeals');if(!el)return;if(!deals){el.innerHTML='<p class="dealnote">אין קובץ עסקאות בודדות לאזור זה; מוצגות צבירות המפה בלבד.</p>';return;}let s=state(),p=periods(s),st={nosqm:0},list=[],multi=0,cross=0;
 if(n.street){list=(deals.rows[n.id]||[]).slice();let cn=canonJs(n.name),m=deals.multi[cn];if(m){list=list.concat(m);cross=m.length;}}
-else if(n.unmatched){list=deals.unassigned||[];}
+else if(n.unmatched){if(n.streetIds){let seen2=new Set();for(let sid of n.streetIds)for(let r of (deals.rows[sid]||[]))if(!seen2.has(r)){seen2.add(r);list.push(r);}}else list=deals.unassigned||[];}
 else{let seen=new Set();for(let sid of (n.streetIds||[])){for(let r of (deals.rows[sid]||[]))if(!seen.has(r)){seen.add(r);list.push(r);}let cn=canonJs(byId[sid].name),m=deals.multi[cn];if(m)multi+=m.length;}}
 let unk=list.filter(r=>r[4]===-1).length;list=list.filter(r=>rowPass(r,s,p,st));list.sort((a,b)=>a[0]<b[0]?1:-1);
 let total=list.length;
