@@ -1,1 +1,1 @@
-{"meta":{"maxD":"2024-08-25","total":1,"collisions":{}},"rows":{"mbvim-s0":[["2024-08-25",1650000,"170","נרקיס",0]]},"multi":{},"unassigned":[],"nodes":[{"id":"mbvim-s0","name":"נרקיס","cells":{"3|7|0|4|4":[1,1650000,1,1650000,1650000]},"geometry":null,"street":true,"alias":false}]}
+{"meta":{"maxD":"2024-08-25","total":1,"collisions":{}},"rows":{"mbvim-s0":[["2024-08-25",1650000,"170","נרקיס",0,"ראשונה","1"]]},"multi":{},"unassigned":[],"nodes":[{"id":"mbvim-s0","name":"נרקיס","cells":{"3|7|0|4|4":[1,1650000,1,1650000,1650000]},"geometry":null,"street":true,"alias":false}]}
