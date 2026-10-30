@@ -22,7 +22,7 @@ function sheetCover(){let h=0,d=document.getElementById('dash'),back=document.ge
 function mobPad(base){let m=document.getElementById('map').getBoundingClientRect();let cover=Math.max(0,m.bottom-(innerHeight-sheetCover()));return{top:base,left:base,right:base,bottom:base+Math.round(cover)};}
 function padFor(base){let mob=matchMedia('(max-width:700px)').matches,pad={top:base,left:base,bottom:base,right:base};if(path.length){if(mob)return mobPad(base);pad.right=base+430;}return pad;}
 function fit(){if(ready){let ns=current(),b=bounds(ns);if(!b&&path.length&&byId[path[0]]&&byId[path[0]].geometry)b=bounds([byId[path[0]]]);if(b)map.fitBounds(b,{padding:padFor(36),duration:600,maxZoom:15.8});}}
-function pick(id){let n=byId[id];if(path.length&&path[path.length-1]===id){showDeals(id);return;}if(n.lazy&&!n.__ld){Promise.all([loadDeals(n.id),loadStreets(n.id)]).then(([dd,sg])=>{if(dd){for(let x of dd.nodes)byId[x.id]=x;if(sg&&sg.features){n.__hasStreets=true;for(let f of sg.features){let nd=dd.nodes[f.properties.streetId];if(nd&&byId[nd.id])byId[nd.id].geometry=f.geometry;}}}n.__ld=true;pick(id);});return;}if(n.street){selected=id;render();showDeals(id);if(ready&&n.geometry){let b=bounds([n]);if(b)map.fitBounds(b,{padding:matchMedia('(max-width:700px)').matches?mobPad(65):padFor(65),maxZoom:16.2,duration:500});}}else if(n.hoods){path.push(id);selected=null;render();fit();}else{if(n.streetIds&&n.streetIds.length&&!n.unmatched){drill(id);}else{showDeals(id);}}}
+function pick(id){let n=byId[id];if(path.length&&path[path.length-1]===id){showDeals(id);return;}if(n.lazy&&!n.__ld){Promise.all([loadDeals(n.id),loadStreets(n.id)]).then(([dd,sg])=>{if(dd){for(let x of dd.nodes)byId[x.id]=x;if(sg&&sg.features){n.__hasStreets=true;for(let f of sg.features){let nd=dd.nodes[f.properties.streetId];if(nd&&byId[nd.id])byId[nd.id].geometry=f.geometry;}}}n.__ld=true;pick(id);});return;}if(DATA.cities.includes(n)&&path[0]!==id){path=[id];selected=null;$('dealback').hidden=true;window.__dealFor=null;render();fit();return;}if(n.street){selected=id;render();showDeals(id);if(ready&&n.geometry){let b=bounds([n]);if(b)map.fitBounds(b,{padding:matchMedia('(max-width:700px)').matches?mobPad(65):padFor(65),maxZoom:16.2,duration:500});}}else if(n.hoods){path.push(id);selected=null;render();fit();}else{if(n.streetIds&&n.streetIds.length&&!n.unmatched){drill(id);}else{showDeals(id);}}}
 function drill(id){path.push(id);selected=null;$('dealback').hidden=true;window.__dealFor=null;render();fit();}
 const DEALS={};
 const canonJs=s=>{s=(s||'').replace(/[ ]/g,' ').replace(/["'״׳”’`]/g,'').trim().replace(/^(רחוב|שדרות|שד|דרך|סמטת|סמ׳)\s+/,'');return s.split(/\s+/).filter(Boolean).sort().join(' ');};
@@ -120,6 +120,7 @@ function dinfo(city,d,extra){
 function renderDash(){
   const sec=$('dash');if(!DATA||!path.length){sec.hidden=true;$('dashopen').hidden=true;return;}
   const cid=path[0],ctx=path.length>1?path[1]:'',token=cid+'/'+ctx;sec.dataset.token=token;
+  sec.hidden=true;$('dashopen').hidden=true;
   loadDash(cid).then(d=>{if(sec.dataset.token!==token)return;drawDash(d,cid,ctx);});
 }
 function drawDash(d,cid,ctx){
